@@ -24,7 +24,7 @@
 
 ## ❌ Delete a room
 
-1. In your `deleteRoom` function has been created in `stores/roomStore.js`.
+1. A `deleteRoom` function has been created in `stores/roomStore.js`.
 2. Add a `try catch` statement.
 3. In the `catch` code block, console log the `error`.
 4. In the `try code` block, make an `axios` request with a `delete` method to your backend's `/rooms/:roomId` endpoint.
