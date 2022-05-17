@@ -6,10 +6,25 @@
 import axios from 'axios';
 ```
 
-2. In `stores/roomStore.js` create a `fetchRooms` function ( make sure to use : async , await, try and catch )
+1. In `stores/roomStore.js` create a `fetchRooms` function
 
 ```js
-fetchRooms = async () => {
+fetchRooms = () => {};
+```
+
+2. Add a `try catch` statement.
+
+```js
+fetchRooms = (room) => {
+  try {
+  } catch (error) {}
+};
+```
+
+3. In the `catch` code block, console log the error.
+
+```js
+fetchRooms = (room) => {
   try {
   } catch (error) {
     console.log(error);
@@ -17,7 +32,20 @@ fetchRooms = async () => {
 };
 ```
 
-3. Call our fetch rooms endpoint, store the response in `this.rooms`.
+4. Call our fetch rooms endpoint, store the response in `this.rooms`.
+
+```js
+fetchRooms = () => {
+  try {
+    const res = axios.get('https://coded-task-axios-be.herokuapp.com/rooms');
+    this.rooms = res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+```
+
+4. Remember that axios is asynchronous, so don't forget to add `async and await`.
 
 ```js
 fetchRooms = async () => {
@@ -32,7 +60,7 @@ fetchRooms = async () => {
 };
 ```
 
-4. FetchRooms should be triggered once App is rendered.
+5. FetchRooms should be triggered once App is rendered.
 
 ```js
 const roomStore = new RoomStore();
@@ -178,6 +206,10 @@ deleteRoom = async (roomId) => {
 
 ## 🤼‍♂️ Update a room
 
+We will use the update endpoint which require us to pass the room id for the room we want to update, and we also need to pass the updated data to the backend.
+
+The backend will respond to us with the updated room object and we will simply replace it with the object we have on the frontend.
+
 ```js
 updateRoom = async (updatedRoom) => {
   try {
@@ -195,6 +227,8 @@ updateRoom = async (updatedRoom) => {
 ```
 
 ## 🤼‍♂️ Create a msg
+
+Every room has `messages` array inside, we need to create a new message in the specific room, then push this new message to the `messages` array.
 
 ```js
 createMsg = async (roomId, newMsg) => {
