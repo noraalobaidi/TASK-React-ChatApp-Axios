@@ -7,9 +7,12 @@
 ## 🚪 Fetch rooms
 
 1. Import `axios`.
-2. In `stores/roomStore.js` create a `fetchRooms` function ( make sure to use : async , await, try and catch )
-3. Call our fetch rooms endpoint, store the response in `this.rooms`.
-4. FetchRooms should be triggered once App is rendered.
+2. In `stores/roomStore.js` create a `fetchRooms` function.
+3. Add a `try catch` statement.
+4. In the `catch` code block, console log the error.
+5. Call our fetch rooms endpoint, store the response in `this.rooms`.
+6. Remember that `axios` is asynchronous, so don't forget to add `async and await`.
+7. FetchRooms should be triggered once App is rendered.
 
 ## ➕ Create a room
 
@@ -34,7 +37,8 @@
 
 # 🤼‍♂️ Challenge
 
-- Update and create messages using the given APIs
+- Use the updateRoom function and endpoint to update a room.
+- Create a function called `createMsg` and use the endpoint for creating a message.
 
 ## here are all the APIs
 
