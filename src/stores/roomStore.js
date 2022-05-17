@@ -1,4 +1,7 @@
 import { makeObservable, observable, action } from 'mobx';
+
+import axios from 'axios';
+
 import slugify from 'react-slugify';
 class RoomStore {
   rooms = [
@@ -27,30 +30,74 @@ class RoomStore {
       updateRoom: action,
       deleteRoom: action,
       createMsg: action,
+      fetchRooms: action,
     });
   }
 
-  createRoom = (room) => {
-    room.id = this.rooms[this.rooms.length - 1].id + 1;
-    room.slug = slugify(room.title);
-    this.rooms.push(room);
+  fetchRooms = async () => {
+    try {
+      const res = await axios.get(
+        'https://coded-task-axios-be.herokuapp.com/rooms'
+      );
+      this.rooms = res.data;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  deleteRoom = (roomId) => {
-    this.rooms = this.rooms.filter((room) => room.id !== roomId);
+  createRoom = async (room) => {
+    try {
+      const res = await axios.post(
+        'https://coded-task-axios-be.herokuapp.com/rooms',
+        room
+      );
+      this.rooms.push(res.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  deleteRoom = async (roomId) => {
+    try {
+      await axios.delete(
+        `https://coded-task-axios-be.herokuapp.com/rooms/${roomId}`
+      );
+      this.rooms = this.rooms.filter((room) => room.id !== roomId);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   createMsg = (roomId, msg) => {
     const room = this.rooms.find((_room) => _room.id === +roomId);
     room.messages.push(msg);
   };
 
-  updateRoom = (updatedRoom) => {
-    const room = this.rooms.find((room) => room.id === updatedRoom.id);
-    room.title = updatedRoom.title;
-    room.description = updatedRoom.description;
-    room.image = updatedRoom.image;
+  updateRoom = async (updatedRoom) => {
+    try {
+      const res = await axios.put(
+        `https://coded-task-axios-be.herokuapp.com/rooms/${updatedRoom.id}`,
+        updatedRoom
+      );
+      this.rooms = this.rooms.map((room) =>
+        room.id === updatedRoom.id ? res.data : room
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  createMsg = async (roomId, newMsg) => {
+    const res = await axios.post(
+      `https://coded-task-axios-be.herokuapp.com/rooms/msg/${roomId}`,
+      newMsg
+    );
+
+    const room = this.rooms.find((room) => room.id === roomId);
+    room.messages.push(res.data);
   };
 }
 
 const roomStore = new RoomStore();
+roomStore.fetchRooms();
 export default roomStore;
