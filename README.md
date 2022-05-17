@@ -1,33 +1,33 @@
 # TASK-NAME
 
-This is the template for tasks. These repos are the starting points and instructions for students to explore a concept.
+Axios chat frontend.
 
 ## Instructions
-- Fork and clone [this repository](https://github.com/JoinCODED/{REPO_NAME}) to your `Development` folder.
 
-## Objective and end result
-- Write the objective of the task.
-- If there are any images, make sure you resize them to around 880px maximum width. **Don't add big images**
+```js
+Endpoints:
+Fetch all rooms:
+Endpoint: https://coded-task-axios-be.herokuapp.com/rooms
+GET
 
-![screenshot](https://tenor.com/xNjE.gif)
+Create a room:
+Endpoint: https://coded-task-axios-be.herokuapp.com/rooms
+Method: POST
+Data required: title,image,description
+
+Update a room:
+Endpoint: https://coded-task-axios-be.herokuapp.com/rooms/${roomId}
+Method: PUT
+Data required: title,image,description
+
+Delete a room:
+Endpoint: https://coded-task-axios-be.herokuapp.com/rooms/${roomId}
+Method: Delete
+
+Create a msg:
+Endpoint: https://coded-task-axios-be.herokuapp.com/rooms/msg/${roomId}
+Method: POST
+Data required: msg
 
 
-### 🍋 The basic challenge title
-
-- Step 1
-- Step 2
-- Step 3
-
-
-### 🤼‍♂️ The hard challenge title
-
-- Step 1
-- Step 2
-- Step 3
-
-
-### 🌶 The Extreme challenge title 
-
-- Step 1
-- Step 2
-- Step 3
+```
